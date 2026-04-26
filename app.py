@@ -11,6 +11,16 @@ hide_github_icon = """
     """
 st.markdown(hide_github_icon, unsafe_allow_html=True)
 
+# Hide "Made with Streamlit" and hamburger menu
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 DATA_PATH = "./tips.csv"
 
 @st.cache_data

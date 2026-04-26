@@ -1,13 +1,17 @@
-"""Streamlit dashboard for tips.csv: table, statistics, and charts."""
-
-from pathlib import Path
+"""Streamlit dashboard for tips data: table, statistics, and charts."""
 
 import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-DATA_PATH = Path(__file__).resolve().parent / "tips.csv"
+hide_github_icon = """
+    <style>
+    .stAppToolbar {visibility: hidden;}
+    </style>
+    """
+st.markdown(hide_github_icon, unsafe_allow_html=True)
 
+DATA_PATH = "./tips.csv"
 
 @st.cache_data
 def load_data() -> pd.DataFrame:
@@ -18,7 +22,6 @@ def load_data() -> pd.DataFrame:
 
 st.set_page_config(page_title="Tips Explorer", layout="wide")
 st.title("Restaurant Tips Explorer")
-# st.caption("Data from `tips.csv` in this folder.")
 
 try:
     df_full = load_data()
@@ -61,12 +64,9 @@ if df.empty:
     st.warning("No rows match the current filters.")
     st.stop()
 
-# st.metric("Rows shown", len(df))
-
 tab_table, tab_stats, tab_viz = st.tabs(["Table", "Statistics", "Visualizations"])
 
 with tab_table:
-    # st.subheader("Data")
     st.dataframe(
         df.drop(columns=["tip_pct"], errors="ignore"),
         use_container_width=True,
@@ -110,8 +110,6 @@ with tab_stats:
     st.dataframe(corr, use_container_width=True)
 
 with tab_viz:
-    st.subheader("Charts")
-
     fig_scatter = px.scatter(
         df,
         x="total_bill",

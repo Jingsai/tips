@@ -1,2 +1,10 @@
 .vscode/
+.ipynb_checkpoints/
+.DS_Store*
 CHAT_HISTORY.md
+data_make_messy.py
+data_cleaning_solution.py
+data_cleaning_solution_all8problems.py
+tips_cleaned.csv
+tips_messy.csv
+data_cleaning.py
